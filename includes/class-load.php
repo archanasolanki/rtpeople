@@ -26,6 +26,9 @@ if ( !class_exists( 'Load' ) ) {
 			add_action( 'init', array( $this, 'register_post_type' ) );
 			//register taxonomy on init hook
 			add_action( 'init', array( $this, 'register_taxonomy' ) );
+			// add thumbnail column to custom post type
+			add_filter( 'manage_people_posts_column', 'people_cpt_columns' );
+			add_action( "manage_people_custom_column", "people_custom_columns" );
 
 			//activate plugin hook
 			register_activation_hook( RTPEOPLE_PATH . 'rt-people.php', array( $this, 'rt_people_flush_rewrites' ) );
@@ -104,7 +107,8 @@ if ( !class_exists( 'Load' ) ) {
 				'has_archive' => true,
 				'exclude_from_search' => false,
 				'publicly_queryable' => true,
-				'capability_type' => 'page',
+				'rewrite' => true,
+				'capability_type' => 'post',
 				'supports' => array( 'title', 'editor', 'trackbacks', 'thumbnail', 'excerpt', 'comments', 'custom-fields' ),
 			    )
 			);
@@ -165,6 +169,37 @@ if ( !class_exists( 'Load' ) ) {
 			foreach ( $taxonomies as $taxonomy => $label ) {
 
 				register_taxonomy( $taxonomy, $label['post_type'], $label[0] );
+			}
+		}
+
+		/*
+		 * Inserts a column to display images of the developers
+		 */
+
+		function people_cpt_columns() {
+
+			$columns = array(
+			    'cb' => '<input type="checkbox" />',
+			    'thumbnail' => 'Profile Picture',
+			    'title' => 'Title',
+			    'availability' => 'Availability',
+			    'featured' => 'Featured',
+			    'author' => 'Author',
+			    'date' => 'Date',
+			);
+			return $columns;
+		}
+
+		function my_custom_columns( $column ) {
+			global $post;
+			if ( $column == 'thumbnail' ) {
+				echo wp_get_attachment_image( get_field( 'page_image', $post->ID ), array( 50, 50 ) );
+			} elseif ( $column == 'featured' ) {
+				if ( get_field( 'featured' ) ) {
+					echo 'Yes';
+				} else {
+					echo 'No';
+				}
 			}
 		}
 

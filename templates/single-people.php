@@ -19,11 +19,21 @@ get_header();
 
 				<h1><?php the_title(); ?></h1>
 				<div class="entry-content">
-					<?php the_content(); ?>
+					<?php
+					the_content();
+					the_post_thumbnail();
+					$id = get_the_ID();
+					$location = get_post_meta( $id, 'location',true);
+					$website = get_post_meta( $id, 'website',true);
+					$availability = get_post_meta( $id, 'availability',true);
+					echo $location."<br />";
+					echo $website."<br />";
+					echo $availability."<br />";
+					?>
 				</div>
 			</div><!-- #content -->
 		</div><!-- #primary -->
-	<?php endwhile; ?>
+<?php endwhile; ?>
 </div><!-- #main-content -->
 
 <?php

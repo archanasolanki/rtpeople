@@ -35,7 +35,7 @@ if ( !class_exists( 'Theme' ) ) {
 			$path_array = array_reverse( $path_array );
 
 			//path to the plugin directory
-			$path_to_template = RTPEOPLE_PATH;
+			$path_to_template = \rtCamp\WP\rtPeople\RTPEOPLE_PATH;
 
 			if ( !empty( $path_array ) ) {
 
@@ -81,7 +81,7 @@ if ( !class_exists( 'Theme' ) ) {
 		 * 
 		 */
 		public function load_content() {
-			$template = RTPEOPLE_PATH . 'templates/content-people.php';
+			$template = \rtCamp\WP\rtPeople\RTPEOPLE_PATH . 'templates/content-people.php';
 
 			//filters template to load for content
 			$template = apply_filters( 'rt_load_content_template', $template );

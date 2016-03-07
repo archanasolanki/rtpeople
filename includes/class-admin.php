@@ -87,7 +87,7 @@ if ( !class_exists( 'Admin' ) ) {
 			if ( isset( $_POST["availability"] ) ) {
 				$availability = $_POST["availability"];
 			}
-			update_post_meta( $post_id, "availability", $availability );
+			update_option( 'availability', $availability );
 
 			if ( isset( $_POST["website"] ) ) {
 				$website = $_POST["website"];

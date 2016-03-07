@@ -25,7 +25,7 @@ get_header();
 					$id = get_the_ID();
 					$location = get_post_meta( $id, 'location',true);
 					$website = get_post_meta( $id, 'website',true);
-					$availability = get_post_meta( $id, 'availability',true);
+					$availability = get_option( 'availability' );
 					echo "<div>Location: ".$location."</div>";
 					echo "<div>Website: ".$website."</div>";
 					echo "<div>Available to hire: ".$availability."</div>";

@@ -56,7 +56,7 @@ if ( !class_exists( 'Admin' ) ) {
 			</P>
 
 			<p>
-			        <input type="checkbox" id="availability" name="availability" checked="<?php checked( $check, 'on' ); ?>" />
+			        <input type="checkbox" id="availability" name="availability" <?php checked( $check, 'yes' ); ?> />
 			        <label for="availability">Yes</label>
 			</p>
 

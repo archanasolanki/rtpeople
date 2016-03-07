@@ -21,14 +21,14 @@ get_header();
 				<div class="entry-content">
 					<?php
 					the_content();
-					the_post_thumbnail();
+					echo "<div>".the_post_thumbnail()."</div>";
 					$id = get_the_ID();
 					$location = get_post_meta( $id, 'location',true);
 					$website = get_post_meta( $id, 'website',true);
 					$availability = get_post_meta( $id, 'availability',true);
-					echo $location."<br />";
-					echo $website."<br />";
-					echo $availability."<br />";
+					echo "<div>".$location."</div>";
+					echo "<div>".$website."</div>";
+					echo "<div>".$availability."</div>";
 					?>
 				</div>
 			</div><!-- #content -->

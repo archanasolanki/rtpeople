@@ -14,9 +14,16 @@ if ( !class_exists( 'Theme' ) ) {
 		 */
 
 		public function init() {
+			//Template directory uri
+			$template_uri = RTPEOPLE_URL;
+			
 			//filter to include custom templates
 			add_filter( 'template_include', array( $this, 'load_template' ) );
 			add_filter( 'template_include', array( $this, 'load_archive_template' ) );
+			
+			//loads necessary css files for restaurants and slick slider
+			add_action( 'wp_enqueue_style', 'rtpeople_style', 1 );
+			wp_enqueue_style( 'rtpeople_style', $template_uri . 'assets/css/style.css' );
 
 			//loads custom content template
 			add_action( 'get_template_part_templates/content', array( $this, 'load_content' ) );
